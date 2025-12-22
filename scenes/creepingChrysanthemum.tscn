@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://clr8e8l0p0bw4"]
+
+[ext_resource type="Script" uid="uid://c64otaadsjweo" path="res://scripts/creeping_chrysanthemum_home.gd" id="1_0yw2i"]
+[ext_resource type="Script" uid="uid://r7grhj2v6imm" path="res://scripts/creeping_chrysanthemum.gd" id="1_t7ol4"]
+[ext_resource type="Texture2D" uid="uid://fvjtj0gplgmc" path="res://assets/creeping_chrysanthemum_hiding.png" id="2_0yw2i"]
+[ext_resource type="Texture2D" uid="uid://du6ynn35qns4x" path="res://assets/creeping_chrysanthemum.png" id="3_4p57x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e05se"]
+resource_local_to_scene = true
+size = Vector2(160.8, 86.9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00424"]
+size = Vector2(228.315, 29.7372)
+
+[node name="ccHome" type="Area2D"]
+collision_mask = 12
+script = ExtResource("1_0yw2i")
+
+[node name="ccHomeCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -321.5)
+scale = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_e05se")
+
+[node name="creepingChrysanthemum" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_t7ol4")
+
+[node name="hidden" type="Sprite2D" parent="creepingChrysanthemum"]
+visible = false
+position = Vector2(0, -100)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_0yw2i")
+
+[node name="onthemove" type="Sprite2D" parent="creepingChrysanthemum"]
+position = Vector2(0, -316)
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("3_4p57x")
+
+[node name="ccHomeDetector" type="CollisionShape2D" parent="creepingChrysanthemum"]
+position = Vector2(46.2192, -621.178)
+rotation = 0.71733
+shape = SubResource("RectangleShape2D_00424")
+debug_color = Color(0.599421, 0.540648, 0.162919, 0.42)
+
+[node name="ccDefeatArea" type="Area2D" parent="creepingChrysanthemum"]
+collision_layer = 8
+collision_mask = 4
+
+[node name="ccDefeatHitBox" type="CollisionPolygon2D" parent="creepingChrysanthemum/ccDefeatArea"]
+polygon = PackedVector2Array(136, -416, 162, -432, 182, -428, 203, -407, 202, -369, 191, -345, 179, -327, 154, -321, 144, -321, 133, -344, 128, -358, 128, -392)
+
+[node name="ccHurttBox" type="CollisionPolygon2D" parent="creepingChrysanthemum"]
+polygon = PackedVector2Array(-53, -703, 42, -754, 88, -747, 129, -705, 128, -645, 160, -604, 143, -545, 77, -500, 3, -506, -53, -594)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="creepingChrysanthemum/ccDefeatArea" to="creepingChrysanthemum" method="_on_cc_defeat_area_body_entered"]

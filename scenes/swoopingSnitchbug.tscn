@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch1w575ew6e2t"]
+
+[ext_resource type="Script" uid="uid://dmjoxv1hcp813" path="res://scripts/swooping_snitchbug.gd" id="3_1ysod"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78bu2"]
+resource_local_to_scene = true
+size = Vector2(108.6, 20)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_83x56"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/Swooping_Snitchbug_P1_art.png-704106df6d0f73ef7e77ee13fa39a3d7.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83x56"]
+size = Vector2(288.992, 120.726)
+
+[node name="ssHome" type="Area2D"]
+collision_mask = 8
+
+[node name="ssHomeCollision" type="CollisionShape2D" parent="."]
+position = Vector2(1.14441e-05, 0)
+scale = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_78bu2")
+
+[node name="swoopingSnitchbug" type="CharacterBody2D" parent="."]
+scale = Vector2(0.25, 0.25)
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("3_1ysod")
+
+[node name="Alive" type="Sprite2D" parent="swoopingSnitchbug"]
+texture = SubResource("CompressedTexture2D_83x56")
+
+[node name="swoopingSnitchbugArms" type="Area2D" parent="swoopingSnitchbug"]
+collision_layer = 8
+collision_mask = 4
+
+[node name="swoopingSnitchbugLeftArm" type="CollisionPolygon2D" parent="swoopingSnitchbug/swoopingSnitchbugArms"]
+polygon = PackedVector2Array(44.9096, 106.935, 21.9711, 129.991, -17.9951, 236.152, -22.4599, 270.535, -34.6231, 280.11, -50.0213, 273.511, -46.1394, 285.804, -39.4108, 297.19, -31.5176, 303.272, -15.343, 311.295, -7.96742, 310.389, 2.6431, 300.943, 11.5715, 277.005, 11.8303, 262.771, 8.31293, 241.728, 44.295, 125.191)
+
+[node name="swoopingSnitchbugRightArm" type="CollisionPolygon2D" parent="swoopingSnitchbug/swoopingSnitchbugArms"]
+polygon = PackedVector2Array(-75.6341, 317.892, -103.092, 308.362, -107.621, 285.847, -150.934, 145.107, -147.313, 123.631, -166.11, 113.544, -173.904, 174.979, -135.163, 262.776, -134.476, 270.57, -144.791, 308.164, -144.103, 320.543, -140.206, 331.546, -124.848, 344.383, -109.26, 349.655, -89.3165, 340.027, -83.5856, 331.775)
+
+[node name="swoopingSnitchbugDefeatBox" type="Area2D" parent="swoopingSnitchbug"]
+collision_layer = 8
+collision_mask = 4
+
+[node name="swoopingSnitchbugGrabBox" type="CollisionPolygon2D" parent="swoopingSnitchbug/swoopingSnitchbugDefeatBox"]
+polygon = PackedVector2Array(108, -64, 48, 104, 16, 132, -28, 144, -76, 152, -148, 124, -168, 112, -192, 84, -208, 40, -208, -12, -196, -60, -164, -116, -140, -144, -92, -168, -48, -180, 12, -176, 60, -160, 88, -116)
+
+[node name="swoopingSnitchbugHomeDetector" type="CollisionShape2D" parent="swoopingSnitchbug"]
+position = Vector2(-51.7278, -14.9581)
+rotation = -0.837758
+shape = SubResource("RectangleShape2D_83x56")
+debug_color = Color(0.672036, 0.49461, 0.32965, 0.42)
+
+[node name="throwTimer" type="Timer" parent="swoopingSnitchbug"]
+wait_time = 3.0
+one_shot = true
+
+[node name="grabCooldownTimer" type="Timer" parent="swoopingSnitchbug"]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="body_exited" from="." to="swoopingSnitchbug" method="_on_ss_home_body_exited"]
+[connection signal="body_entered" from="swoopingSnitchbug/swoopingSnitchbugArms" to="swoopingSnitchbug" method="_on_swooping_snitchbug_arms_body_entered"]
+[connection signal="body_entered" from="swoopingSnitchbug/swoopingSnitchbugArms" to="swoopingSnitchbug" method="_on_swooping_snitchbug_arms_entered"]
+[connection signal="body_entered" from="swoopingSnitchbug/swoopingSnitchbugDefeatBox" to="swoopingSnitchbug" method="_on_swooping_snitchbug_grab_box_body_entered"]
+[connection signal="timeout" from="swoopingSnitchbug/throwTimer" to="swoopingSnitchbug" method="_on_throw_timer_timeout"]
+[connection signal="timeout" from="swoopingSnitchbug/grabCooldownTimer" to="swoopingSnitchbug" method="_on_grab_cooldown_timer_timeout"]

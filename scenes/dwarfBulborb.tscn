@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://ch6b5e3unnuc3"]
+
+[ext_resource type="Script" uid="uid://dlimhtvj3ls8j" path="res://scripts/dwarf_bulborb.gd" id="1_ad2ka"]
+[ext_resource type="Script" uid="uid://cqyb1b51406n8" path="res://scripts/dwarf_bulborb_home.gd" id="1_d7d6g"]
+[ext_resource type="Texture2D" uid="uid://cgew0npcsp64h" path="res://assets/P2_Red_Bulborb.png" id="1_y16gg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ny310"]
+size = Vector2(502, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2e8ls"]
+size = Vector2(20.2667, 18.5333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7d6g"]
+size = Vector2(152, 11)
+
+[node name="dwarfBulborbHome" type="Area2D"]
+collision_mask = 12
+script = ExtResource("1_d7d6g")
+
+[node name="dwarfBulborbHomeCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -35)
+shape = SubResource("RectangleShape2D_ny310")
+
+[node name="dwarfBulborb" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_ad2ka")
+
+[node name="Alive" type="Sprite2D" parent="dwarfBulborb"]
+position = Vector2(0, -75)
+rotation = 3.14159
+scale = Vector2(0.5, -0.5)
+texture = ExtResource("1_y16gg")
+
+[node name="Dead" type="Sprite2D" parent="dwarfBulborb"]
+visible = false
+
+[node name="dwarfBulborbHitbox" type="CollisionShape2D" parent="dwarfBulborb"]
+position = Vector2(3.57628e-06, -69.5001)
+scale = Vector2(7.5, 7.5)
+shape = SubResource("RectangleShape2D_2e8ls")
+
+[node name="movementTimer" type="Timer" parent="dwarfBulborb"]
+wait_time = 0.5
+one_shot = true
+
+[node name="dwarfBulborbDefeatArea" type="Area2D" parent="dwarfBulborb"]
+collision_layer = 8
+collision_mask = 4
+
+[node name="dwarfBulborbDefeatCollisionBox" type="CollisionShape2D" parent="dwarfBulborb/dwarfBulborbDefeatArea"]
+position = Vector2(0, -144.5)
+shape = SubResource("RectangleShape2D_d7d6g")
+debug_color = Color(1, 0, 0, 0.482353)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="dwarfBulborb/movementTimer" to="dwarfBulborb" method="_on_movement_timer_timeout"]
+[connection signal="body_entered" from="dwarfBulborb/dwarfBulborbDefeatArea" to="dwarfBulborb" method="_on_dwarf_bulborb_defeat_box_body_entered"]

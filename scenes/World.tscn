@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://b1ib5c0k5wxlh"]
+
+[ext_resource type="Script" uid="uid://c2wcukqln4x67" path="res://scripts/world.gd" id="1_d1c63"]
+[ext_resource type="PackedScene" uid="uid://ch6b5e3unnuc3" path="res://scenes/dwarfBulborb.tscn" id="2_1lgw5"]
+[ext_resource type="PackedScene" uid="uid://ch1w575ew6e2t" path="res://scenes/swoopingSnitchbug.tscn" id="3_1lgw5"]
+[ext_resource type="PackedScene" uid="uid://brq1nh2rd4bse" path="res://scenes/Pikmin.tscn" id="3_hlk0d"]
+[ext_resource type="Texture2D" uid="uid://bwv2cldue0mhv" path="res://assets/dev_128_or_032x.jpg" id="4_0uv0p"]
+[ext_resource type="PackedScene" uid="uid://clr8e8l0p0bw4" path="res://scenes/creepingChrysanthemum.tscn" id="5_hlk0d"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_rwgxs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wyf3"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_k0juu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71j4m"]
+size = Vector2(20, 19.5)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_d1c63")
+dwarfBulborb = ExtResource("2_1lgw5")
+swoopingSnitchbug = ExtResource("3_1lgw5")
+Player = ExtResource("3_hlk0d")
+cc = ExtResource("5_hlk0d")
+
+[node name="DebugTexture" type="TextureRect" parent="."]
+offset_right = 5120.0
+offset_bottom = 5120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_0uv0p")
+stretch_mode = 1
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(2560, 5056)
+scale = Vector2(256, 6.4)
+collision_layer = 2
+collision_mask = 12
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Floor"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_rwgxs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_4wyf3")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(64, 2560)
+scale = Vector2(6.4, 256)
+collision_layer = 2
+collision_mask = 12
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="LeftWall"]
+position = Vector2(0, -0.25)
+scale = Vector2(20, 19.5)
+mesh = SubResource("QuadMesh_k0juu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_71j4m")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(5056, 2560)
+scale = Vector2(6.4, 256)
+collision_layer = 2
+collision_mask = 12
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="RightWall"]
+position = Vector2(0, -0.25)
+scale = Vector2(20, 19.5)
+mesh = SubResource("QuadMesh_k0juu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_71j4m")
