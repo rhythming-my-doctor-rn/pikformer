@@ -1,12 +1,13 @@
 [gd_scene load_steps=11 format=4 uid="uid://3o2wruntvo0u"]
 
-[ext_resource type="Texture2D" uid="uid://cgjrp2m720lpb" path="res://assets/grasstileset.png" id="1_44w35"]
+[ext_resource type="Texture2D" uid="uid://cgjrp2m720lpb" path="res://assets/tilesets/grasstileset.png" id="1_44w35"]
 [ext_resource type="Script" uid="uid://cuc0di7g84dy0" path="res://scripts/area_1.gd" id="1_uwkgo"]
 [ext_resource type="PackedScene" uid="uid://ch6b5e3unnuc3" path="res://scenes/dwarfBulborb.tscn" id="2_aq3wa"]
-[ext_resource type="Texture2D" uid="uid://dx0nhc4gksx4b" path="res://assets/pikmin spirtsheet.png" id="2_nww3i"]
+[ext_resource type="Texture2D" uid="uid://u00ed3rs6mu6" path="res://assets/tilesets/pikmin spirtsheet.png" id="2_nww3i"]
 [ext_resource type="PackedScene" uid="uid://ch1w575ew6e2t" path="res://scenes/swoopingSnitchbug.tscn" id="3_nww3i"]
 [ext_resource type="PackedScene" uid="uid://brq1nh2rd4bse" path="res://scenes/Pikmin.tscn" id="4_1av67"]
 [ext_resource type="PackedScene" uid="uid://clr8e8l0p0bw4" path="res://scenes/creepingChrysanthemum.tscn" id="5_57x3n"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0bq5r"]
 texture = ExtResource("1_44w35")

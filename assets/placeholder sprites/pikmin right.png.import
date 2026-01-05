@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xj25q4r2eduq"
-path="res://.godot/imported/pikmin right.png-d39f689e9a929d6a30c35fb26c2d6858.ctex"
+path="res://.godot/imported/pikmin right.png-2316ac5467394dbd3db63f68b80f9175.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pikmin right.png"
-dest_files=["res://.godot/imported/pikmin right.png-d39f689e9a929d6a30c35fb26c2d6858.ctex"]
+source_file="res://assets/placeholder sprites/pikmin right.png"
+dest_files=["res://.godot/imported/pikmin right.png-2316ac5467394dbd3db63f68b80f9175.ctex"]
 
 [params]
 

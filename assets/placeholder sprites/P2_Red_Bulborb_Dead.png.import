@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://do4tsknjur5aj"
-path="res://.godot/imported/P2_Red_Bulborb_Dead.png-28980055c1e40a722a8ed247a62cafe2.ctex"
+path="res://.godot/imported/P2_Red_Bulborb_Dead.png-9fe623916fec5ebd815be73acce3508d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/P2_Red_Bulborb_Dead.png"
-dest_files=["res://.godot/imported/P2_Red_Bulborb_Dead.png-28980055c1e40a722a8ed247a62cafe2.ctex"]
+source_file="res://assets/placeholder sprites/P2_Red_Bulborb_Dead.png"
+dest_files=["res://.godot/imported/P2_Red_Bulborb_Dead.png-9fe623916fec5ebd815be73acce3508d.ctex"]
 
 [params]
 

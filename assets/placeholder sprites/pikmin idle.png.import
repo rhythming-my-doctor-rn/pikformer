@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bij7tym1fbi4i"
-path="res://.godot/imported/pikmin idle.png-288ddc9fb7702a8d1d1d8d3446e9f62f.ctex"
+path="res://.godot/imported/pikmin idle.png-a41a9ae915f80cc4d24a5d75783d69a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pikmin idle.png"
-dest_files=["res://.godot/imported/pikmin idle.png-288ddc9fb7702a8d1d1d8d3446e9f62f.ctex"]
+source_file="res://assets/placeholder sprites/pikmin idle.png"
+dest_files=["res://.godot/imported/pikmin idle.png-a41a9ae915f80cc4d24a5d75783d69a9.ctex"]
 
 [params]
 
