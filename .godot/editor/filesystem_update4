@@ -1,0 +1,7 @@
+res://scenes/area_1.tscn
+res://scripts/pikmin_main.gd
+res://scenes/Pikmin.tscn
+res://scripts/dwarf_bulborb.gd
+res://scripts/area_1.gd
+res://scripts/dwarf_bulborb_home.gd
+res://scripts/global_variables.gd

@@ -11,7 +11,7 @@ func _ready():
 	var ss=swoopingSnitchbug.instantiate()
 	var cc=creepingChrysanthemum.instantiate()
 	pikmin.position=Vector2(0,0)
-	db.position=Vector2(-1500,0)
+	db.position=Vector2(-500,0)
 	ss.position=Vector2(-700, -600)
 	add_child(pikmin)
 	add_child(db)

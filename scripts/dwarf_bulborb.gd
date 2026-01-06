@@ -1,18 +1,19 @@
 extends CharacterBody2D
 
-@export var speed=GlobalVariables.db_speed
+@export var speed=200
 @onready var moveysprite=$Alive
 @onready var pik=get_parent().get_parent().get_node("pikmin")
 var aggro=false
-var eator=true
-var agtimerend=false
-var timerstarted=false
+var prowling=true
+var aggro_timer_ended=false
+var detect_timer_started=false
 var direction=1
 
+
+
 func _physics_process(_delta):
-	print(get_parent().get_parent())
-	if eator:
-		eatong()
+	if prowling:
+		eating()
 	if aggro:
 		aggroed()
 	
@@ -32,8 +33,8 @@ func _on_dwarf_bulborb_defeat_box_body_entered(_body):
 	self.queue_free()
 	get_parent().queue_free()
 
-func eatong():
-	agtimerend=false
+func eating():
+	aggro_timer_ended=false
 	if self.global_position.distance_to(get_parent().position)<=5:
 		velocity.x=0
 		move_and_slide()
@@ -51,10 +52,10 @@ func eatong():
 			scale*=Vector2(-1,1)
 
 func aggroed():
-	if !timerstarted:
+	if !detect_timer_started:
 		$movementTimer.start()
-		timerstarted=true
-	if agtimerend:
+		detect_timer_started=true
+	if aggro_timer_ended:
 		if pik.position.x<self.global_position.x:
 			direction=-1
 		
@@ -69,5 +70,5 @@ func aggroed():
 			scale*=Vector2(-1,1)
 
 func _on_movement_timer_timeout():
-	agtimerend=true
-	timerstarted=false
+	aggro_timer_ended=true
+	detect_timer_started=false
