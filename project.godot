@@ -12,7 +12,7 @@ config_version=5
 
 config/name="pikfrmr"
 run/main_scene="uid://b1ib5c0k5wxlh"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 
 [autoload]
 
