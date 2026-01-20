@@ -13,6 +13,8 @@ func _ready():
 	pikmin.position=Vector2(0,0)
 	db.position=Vector2(-500,0)
 	ss.position=Vector2(-700, -600)
+	cc.position=Vector2(-5000,-100)
 	add_child(pikmin)
 	add_child(db)
 	add_child(ss)
+	add_child(cc)

@@ -4,10 +4,12 @@ extends CharacterBody2D
 @export var jumpForce=500
 @onready var jump=$jump
 @onready var movement=$movement
+var speed=150
 var total=0
 var lastTotal=0
 var lastVelocityx=0
 var isJumping=false
+var lastXVelo=0
 
 func falling():
 	GlobalVariables.playerhit()
@@ -21,7 +23,9 @@ func _physics_process(delta):
 	#returns -1 for left and 1 for right
 	var hDirection=Input.get_axis("move_left", "move_right")
 	#defines forward and backward movement
-	velocity.x=150*hDirection
+	velocity.x=speed*hDirection
+	if (velocity.x!=0):
+		lastXVelo=velocity.x
 	
 	if !is_on_floor():
 		lastVelocityx=velocity.x
@@ -57,14 +61,20 @@ func _physics_process(delta):
 		get_node("movement").show()
 		move_and_slide()
 	#Idle
-	if is_on_floor()&&velocity.x==0&&!Input.is_action_pressed("jump")&&!Input.is_action_pressed("move_left")&&!Input.is_action_pressed("move_right"):
+	if is_on_floor()&&velocity.x==0&&!Input.is_action_pressed("jump")&&(!Input.is_action_pressed("move_left")&&!Input.is_action_pressed("move_right"))||(Input.is_action_pressed("move_right")&&Input.is_action_pressed("move_left")):
 		get_node("jump").hide()
 		get_node("movement").hide()
 		if (Input.is_action_just_released("move_left")):
 			get_node("idleLeft").show()
 		if (Input.is_action_just_released("move_right")):
 			get_node("idleRight").show()
-	
+		if Input.is_action_pressed("move_right")&&Input.is_action_pressed("move_left")&&lastXVelo>0:
+			get_node("movement").hide()
+			get_node("idleRight").show()
+		if Input.is_action_pressed("move_right")&&Input.is_action_pressed("move_left")&&lastXVelo<0:
+			get_node("movement").hide()
+			get_node("idleLeft").show()
+	#jump
 	if Input.is_action_just_released("jump")&&Input.is_action_pressed("move_right")&&lastTotal>=1:
 		get_node("idleRight").hide()
 		get_node("idleLeft").hide()
@@ -93,13 +103,14 @@ func _physics_process(delta):
 			get_node("idleLeft").show()
 		if (Input.is_action_pressed("move_right")):
 			get_node("idleRight").show()
-		velocity.x=0
+		speed=0
 		total+=delta
 		lastTotal=total
 
 		get_tree().root.get_camera_2d().zoom_out()
 		
 	if(Input.is_action_just_released("jump"))&&is_on_floor():
+		speed=150
 		isJumping=true
 		$totalTimer.start()
 	
@@ -158,10 +169,13 @@ func _physics_process(delta):
 		velocity.x=GlobalVariables.ss_speed/2.0
 		move_and_slide()
 		
-	print("xvelo: ",velocity.x)
+	print("xvelo: ",get_real_velocity())
+	print("lvelo: ",lastVelocityx)
 	print("hdire: ",hDirection)
 	print("total: ",total)
 	print("ltotl: ",lastTotal)
+	print("rbpre: ",Input.is_action_pressed("move_right"))
+	print("lbpre: ",Input.is_action_pressed("move_left"))
 
 func _on_total_timer_timeout():
 	total=0
