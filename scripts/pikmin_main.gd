@@ -64,45 +64,32 @@ func _physics_process(delta):
 	if is_on_floor()&&velocity.x==0&&!Input.is_action_pressed("jump")&&(!Input.is_action_pressed("move_left")&&!Input.is_action_pressed("move_right"))||(Input.is_action_pressed("move_right")&&Input.is_action_pressed("move_left")):
 		get_node("jump").hide()
 		get_node("movement").hide()
-		if (Input.is_action_just_released("move_left")):
+		if (Input.is_action_just_released("move_left"))||(Input.is_action_pressed("move_right")&&Input.is_action_pressed("move_left")&&lastXVelo<0):
 			get_node("idleLeft").show()
-		if (Input.is_action_just_released("move_right")):
+		if (Input.is_action_just_released("move_right"))||(Input.is_action_pressed("move_right")&&Input.is_action_pressed("move_left")&&lastXVelo>0):
 			get_node("idleRight").show()
-		if Input.is_action_pressed("move_right")&&Input.is_action_pressed("move_left")&&lastXVelo>0:
-			get_node("movement").hide()
-			get_node("idleRight").show()
-		if Input.is_action_pressed("move_right")&&Input.is_action_pressed("move_left")&&lastXVelo<0:
-			get_node("movement").hide()
-			get_node("idleLeft").show()
 	#jump
-	if Input.is_action_just_released("jump")&&Input.is_action_pressed("move_right")&&lastTotal>=1:
+	if Input.is_action_just_released("jump")&&lastTotal>=1:
 		get_node("idleRight").hide()
 		get_node("idleLeft").hide()
 		get_node("movement").hide()
-		jump.play("jumpRight")
-		get_node("jump").show()
+		if Input.is_action_pressed("move_right"):
+			jump.play("jumpRight")
+			get_node("jump").show()
+		if Input.is_action_pressed("move_left"):
+			jump.play("jumpLeft")
+			get_node("jump").show()
 		move_and_slide()
-		
-	if Input.is_action_just_released("jump")&&Input.is_action_pressed("move_left")&&lastTotal>=1:
-		get_node("idleRight").hide()
-		get_node("idleLeft").hide()
-		get_node("movement").hide()
-		jump.play("jumpLeft")
-		get_node("jump").show()
-		move_and_slide()
-	
-
-	
-	
-	
 	
 	if Input.is_action_pressed("jump")&&is_on_floor():
 		get_node("jump").hide()
 		get_node("movement").hide()
 		if (Input.is_action_pressed("move_left")):
 			get_node("idleLeft").show()
+			get_node("idleRight").hide()
 		if (Input.is_action_pressed("move_right")):
 			get_node("idleRight").show()
+			get_node("idleLeft").hide()
 		speed=0
 		total+=delta
 		lastTotal=total
@@ -170,7 +157,8 @@ func _physics_process(delta):
 		move_and_slide()
 		
 	print("xvelo: ",get_real_velocity())
-	print("lvelo: ",lastVelocityx)
+	print("onflo: ",is_on_floor())
+	print("lvelo: ",lastXVelo)
 	print("hdire: ",hDirection)
 	print("total: ",total)
 	print("ltotl: ",lastTotal)
