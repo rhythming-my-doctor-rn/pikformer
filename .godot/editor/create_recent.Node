@@ -1,13 +1,13 @@
+CollisionShape2D
+Area2D
 AnimatedSprite2D
 VisibleOnScreenEnabler2D
 Node2D
 TileMapLayer
 MeshInstance2D
-CollisionShape2D
 StaticBody2D
 Timer
 CharacterBody2D
-Area2D
 CollisionPolygon2D
 Sprite2D
 RayCast2D

@@ -207,3 +207,12 @@ dwarfBulborb = ExtResource("2_aq3wa")
 swoopingSnitchbug = ExtResource("3_nww3i")
 redPikmin = ExtResource("4_1av67")
 creepingChrysanthemum = ExtResource("5_57x3n")
+
+[node name="ccHome" parent="." instance=ExtResource("5_57x3n")]
+position = Vector2(-2229, -100)
+
+[node name="ssHome" parent="." instance=ExtResource("3_nww3i")]
+position = Vector2(-1259, -1406)
+
+[node name="dwarfBulborbHome" parent="." instance=ExtResource("2_aq3wa")]
+position = Vector2(-1140, 0)
