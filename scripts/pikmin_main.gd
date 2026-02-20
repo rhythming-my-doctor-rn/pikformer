@@ -158,9 +158,6 @@ func _physics_process(delta):
 		velocity.x=GlobalVariables.ss_speed/2.0
 		move_and_slide()
 		
-	print("y velocity: ",velocity.y)
-	print("hdirection: ",hDirection)
-	print("lastdirect: ",lastDirection)
 		
 
 func _on_total_timer_timeout():

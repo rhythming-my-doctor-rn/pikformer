@@ -22,16 +22,6 @@ func _physics_process(_delta):
 		if aggro:
 			aggroed()
 		
-		for i in get_slide_collision_count():
-			var collision = get_slide_collision(i)
-			if collision.get_collider():
-				if collision.get_collider().name=="pikmin":
-					if direction>0:
-						GlobalVariables.player_yvelocityfling=-250
-						GlobalVariables.player_xvelocityfling=250
-					if direction<0:
-						GlobalVariables.player_yvelocityfling=-250
-						GlobalVariables.player_xvelocityfling=-250
 
 
 func _on_dwarf_bulborb_defeat_box_body_entered(_body):

@@ -14,10 +14,6 @@ config/name="pikfrmr"
 run/main_scene="uid://b1ib5c0k5wxlh"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 
-[autoload]
-
-GlobalVariables="*res://scripts/global_variables.gd"
-
 [display]
 
 window/stretch/mode="canvas_items"

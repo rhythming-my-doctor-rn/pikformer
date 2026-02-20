@@ -2,39 +2,49 @@
 
 extends CharacterBody2D
 
-@export var speed=GlobalVariables.ss_speed
-@onready var moveysprite=$Alive
+@export var speed=200
+@onready var pik=null
 var canGrabPikmin=true
+var pikminCaught=false
+var outOfHome=false
+var throw=false
+var direction=1
 
 func _physics_process(_delta):
-	GlobalVariables.ss_xpos=global_position.x
-	GlobalVariables.ss_ypos=global_position.y
-	velocity.x=speed
-	move_and_slide()
-	if canGrabPikmin==true:
-		$swoopingSnitchbugArms.set_collision_mask_value(3,true)
-	if canGrabPikmin==false:
-		$swoopingSnitchbugArms.set_collision_mask_value(3,false)
-
-func _on_swooping_snitchbug_grab_box_body_entered(_body):
-	if GlobalVariables.pikkey_caught==false:
-		self.queue_free()
-		get_parent().queue_free()
+	if get_parent().get_parent().get_node("pikmin"):
+		pik=get_parent().get_parent().get_node("pikmin")
+		
+	if pik!=null:
+		velocity.x=speed*direction
+		
+		if outOfHome:
+			if get_parent().position.x<self.global_position.x:
+				direction=-1
+				if velocity.x<0&&!scale.y<0:
+					scale*=Vector2(-1,1)
+			elif get_parent().position.x>self.global_position.x:
+				direction=1
+				if velocity.x>0&&scale.y<0:
+					scale*=Vector2(-1,1)
+		
+		print("position: ",position)
+		print("gloposit: ",global_position)
+		move_and_slide()
 
 func _on_throw_timer_timeout():
-	GlobalVariables.pikkey_caught=false
-	$grabCooldownTimer.start()
+	throw=true
 
 func _on_swooping_snitchbug_arms_entered(_body):
-	if GlobalVariables.pikkey_caught==false:
-		GlobalVariables.pikkey_caught=true
-		canGrabPikmin=false
+	if get_parent().get_parent().get_node("pikmin"):
+		pik=get_parent().get_parent().get_node("pikmin")
+		
+	if pik!=null:
+		pikminCaught=true
 		$throwTimer.start()
 		
-
-func _on_ss_home_body_exited(_body):
-	speed*=-1
-	scale*=Vector2(-1,1)
-
-func _on_grab_cooldown_timer_timeout():
-	canGrabPikmin=true
+		if pikminCaught:
+			pik.global_position.x=self.global_position.x
+			pik.global_position.y=self.global_position.y+220
+			if throw:
+				pikminCaught=false
+				throw=false
