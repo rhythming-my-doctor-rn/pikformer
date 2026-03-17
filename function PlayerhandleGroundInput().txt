@@ -1,0 +1,13 @@
+function Player:handleGroundInput()
+    if self:playerJumped() then
+        self:changeToJumpState()
+    elseif pd.buttonJustPressed(pd.kButtonB) and self.dashAvailable and self.dashAbility then
+        self:changeToDashState()
+    elseif pd.buttonIsPressed(pd.kButtonLeft) then
+        self:changeToRunState("left")
+    elseif pd.buttonIsPressed(pd.kButtonRight) then
+        self:changeToRunState("right")
+    else
+        self:changeToIdleState()
+    end
+end
